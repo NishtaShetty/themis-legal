@@ -1,0 +1,116 @@
+# Legal Information
+
+## Contract Law
+A contract is a legally binding agreement between two or more parties. For a contract to be valid, it must include:
+1. An offer
+2. Acceptance of the offer
+3. Consideration (something of value exchanged)
+4. Intention to create legal relations
+5. Certainty of terms
+6. Capacity of parties to enter the contract
+
+### Breach of Contract
+Breach of contract occurs when a party fails to fulfill their obligations under the contract without a legitimate legal excuse. 
+Remedies for breach of contract may include:
+- Damages (monetary compensation)
+- Specific performance (court order to fulfill the contract)
+- Cancellation and restitution (return to pre-contract state)
+
+## Property Law
+Property law deals with the rights and obligations of owners, possessors, and users of real and personal property. 
+It covers:
+- Real property (land and buildings)
+- Personal property (movable items)
+- Intellectual property (creations of the mind)
+
+### Real Property
+Real property ownership rights include:
+- Right to use
+- Right to exclude others
+- Right to transfer
+- Right to possess
+
+### Intellectual Property
+Intellectual property types include:
+- Patents (inventions)
+- Trademarks (brands, logos)
+- Copyrights (creative works)
+- Trade secrets (confidential business information)
+
+## Criminal Law
+Criminal law involves prosecution by the government of a person for an act classified as a crime.
+Types of crimes include:
+- Felonies (serious crimes like murder, robbery)
+- Misdemeanors (less serious crimes)
+- Infractions (minor violations)
+
+### Criminal Defenses
+Common legal defenses in criminal cases:
+- Self-defense
+- Insanity
+- Alibi
+- Entrapment
+- Statute of limitations
+
+## Family Law
+Family law deals with family matters and domestic relations, including:
+- Marriage and divorce
+- Child custody and support
+- Adoption
+- Domestic violence protection
+
+### Divorce
+Divorce proceedings typically address:
+- Division of property
+- Child custody and visitation
+- Child support
+- Spousal support/alimony
+
+## Employment Law
+Employment law governs the relationship between employers and employees.
+Key areas include:
+- Workplace safety
+- Wage and hour laws
+- Anti-discrimination
+- Wrongful termination
+- Employee benefits
+- Workers' compensation
+
+### Worker Rights
+Employees generally have rights to:
+- Minimum wage
+- Overtime pay
+- Safe work environment
+- Freedom from discrimination
+- Medical leave
+
+## Constitutional Law
+Constitutional law is based on the Constitution and its interpretations by the courts.
+Key principles include:
+- Separation of powers
+- Federalism
+- Individual rights (free speech, religion, etc.)
+- Due process
+- Equal protection
+
+### First Amendment
+The First Amendment protects:
+- Freedom of speech
+- Freedom of religion
+- Freedom of the press
+- Freedom of assembly
+- Right to petition the government
+
+## Tort Law
+Tort law provides remedies for civil wrongs not arising from contractual obligations.
+Types of torts:
+- Negligence
+- Intentional torts (assault, battery, defamation)
+- Strict liability torts
+
+### Elements of Negligence
+To prove negligence, one must establish:
+1. Duty of care
+2. Breach of duty
+3. Causation
+4. Damages 

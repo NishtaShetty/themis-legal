@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="ThemisAI Legal Aid Platform" />
+  <title>Themis AI - Legal Aid Platform</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    .fade-in {
+      animation: fadeIn ease 2s;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body class="bg-black text-white font-sans">
+  <div id="root"></div>
+
+  <!-- Hero Section with Background Video -->
+  <section class="relative h-screen w-full overflow-hidden">
+    <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-[-1]">
+      <source src="5636977-uhd_3840_2160_24fps.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-sm flex flex-col items-center justify-center px-6 text-center">
+      <h1 class="text-5xl md:text-6xl font-extrabold fade-in mb-4 text-white" data-aos="fade-down">Themis AI</h1>
+      <p class="text-lg md:text-xl max-w-2xl fade-in mb-6 text-gray-200" data-aos="fade-up" data-aos-delay="200">
+        Justice for All — Instant Legal Aid, Aadhaar Verified Access, and Smart AI Guidance.
+      </p>
+      <a href="#login" class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-xl text-lg shadow-lg transition duration-300" data-aos="zoom-in" data-aos-delay="400">
+        Login to Start
+      </a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="bg-gray-900 py-20" data-aos="fade-up">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold">Our Services</h2>
+      <p class="text-lg text-gray-300 mt-2">Explore our key features for AI-assisted legal help</p>
+    </div>
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-6">
+      <!-- Card 1 -->
+      <div class="bg-gray-800 hover:bg-gray-700 p-6 rounded-xl shadow-lg transition transform hover:-translate-y-1 hover:scale-105" data-aos="zoom-in" data-aos-delay="100">
+        <img src="brunette-businesswoman-writing-document.jpg" alt="Upload Docs" class="rounded-lg mb-4" />
+        <h3 class="text-xl font-semibold mb-2">Upload & Summarize Legal Docs</h3>
+        <p class="text-gray-300 text-sm leading-relaxed">Upload contracts, FIRs, or court orders and get concise summaries in plain language.</p>
+      </div>
+      <!-- Card 2 -->
+      <div class="bg-gray-800 hover:bg-gray-700 p-6 rounded-xl shadow-lg transition transform hover:-translate-y-1 hover:scale-105" data-aos="zoom-in" data-aos-delay="200">
+        <img src="2106.i201.011.S.m004.c13.chatbot messenger AI isometric-01.jpg" alt="Chatbot" class="rounded-lg mb-4" />
+        <h3 class="text-xl font-semibold mb-2">Ask Chatbot for Legal Help</h3>
+        <p class="text-gray-300 text-sm leading-relaxed">Get real-time help from a multilingual AI chatbot—laws, courts, document guidance, and more.</p>
+      </div>
+      <!-- Card 3 -->
+      <div class="bg-gray-800 hover:bg-gray-700 p-6 rounded-xl shadow-lg transition transform hover:-translate-y-1 hover:scale-105" data-aos="zoom-in" data-aos-delay="300">
+        <img src="still-life-with-scales-justice(1).jpg" alt="Document Generator" class="rounded-lg mb-4" />
+        <h3 class="text-xl font-semibold mb-2">Legal Document Generator</h3>
+        <p class="text-gray-300 text-sm leading-relaxed">Create RTIs, petitions, rent agreements easily—just describe your need and validate.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Aadhaar Login Section -->
+  <section id="login" class="py-20 bg-gray-950" data-aos="fade-up">
+    <div class="max-w-md mx-auto bg-gray-900 p-8 rounded-xl shadow-xl">
+      <h2 class="text-2xl text-center font-bold text-white mb-6">Login with Aadhaar</h2>
+
+      <input id="aadhaarInput" type="text" placeholder="Enter Aadhaar Number" maxlength="12"
+             class="w-full p-4 mb-4 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600" />
+
+      <button id="sendOtpBtn" class="w-full py-3 mb-4 bg-blue-600 text-white rounded-lg opacity-50 cursor-not-allowed transition-all" disabled>
+        Send OTP
+      </button>
+
+      <div id="otpSentMessage" class="hidden text-green-400 text-center text-sm mb-4"></div>
+
+      <input id="otpInput" type="text" placeholder="Enter OTP" maxlength="6"
+             class="w-full p-4 mb-4 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" disabled />
+
+      <button id="loginBtn" class="w-full py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 opacity-50 cursor-not-allowed transition-all" disabled>
+        Login
+      </button>
+    </div>
+  </section>
+
+  <!-- FAQ Section with Video -->
+  <section class="relative h-screen overflow-hidden">
+    <video autoplay muted loop class="absolute w-full h-full object-cover z-0">
+      <source src="13442303_1920_1080_30fps.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-black bg-opacity-70 backdrop-blur-md z-10"></div>
+    <div class="relative z-20 h-full flex flex-col justify-center px-10">
+      <h2 class="text-4xl font-bold mb-10 text-white" data-aos="fade-right">FAQs</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-white text-sm" data-aos="fade-up" data-aos-delay="200">
+        <div>
+          <p class="font-semibold mb-1">What is Themis AI?</p>
+          <p class="mb-4 text-gray-300">An AI-powered legal aid platform with Aadhaar-based login and intelligent tools.</p>
+
+          <p class="font-semibold mb-1">Is Aadhaar login secure?</p>
+          <p class="mb-4 text-gray-300">Yes, it uses OTP-based authentication and encryption.</p>
+
+          <p class="font-semibold mb-1">What documents can I generate?</p>
+          <p class="mb-4 text-gray-300">RTIs, petitions, rent agreements, and more.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-1">Can I use the chatbot in my language?</p>
+          <p class="mb-4 text-gray-300">Yes, it supports multiple Indian languages.</p>
+
+          <p class="font-semibold mb-1">Is Themis AI free?</p>
+          <p class="mb-4 text-gray-300">Most features are free. Premium plans may come later.</p>
+
+          <p class="font-semibold mb-1">How does summarization work?</p>
+          <p class="text-gray-300">Upload your legal doc; the AI gives you a human-readable summary.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-center py-6 text-gray-400">
+    <p>&copy; 2025 Themis AI Legal Aid Platform. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const aadhaarInput = document.getElementById('aadhaarInput');
+      const sendOtpBtn = document.getElementById('sendOtpBtn');
+      const otpInput = document.getElementById('otpInput');
+      const loginBtn = document.getElementById('loginBtn');
+      const otpSentMessage = document.getElementById('otpSentMessage');
+
+      let currentUser = null;
+
+      aadhaarInput.addEventListener('input', () => {
+        if (/^\d{12}$/.test(aadhaarInput.value)) {
+          sendOtpBtn.disabled = false;
+          sendOtpBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+          sendOtpBtn.disabled = true;
+          sendOtpBtn.classList.add('opacity-50', 'cursor-not-allowed');
+          otpInput.value = '';
+          otpInput.disabled = true;
+          loginBtn.disabled = true;
+          loginBtn.classList.add('opacity-50', 'cursor-not-allowed');
+          otpSentMessage.classList.add('hidden');
+          otpSentMessage.textContent = '';
+        }
+      });
+
+      sendOtpBtn.addEventListener('click', async () => {
+        const aadhaar = aadhaarInput.value.trim();
+
+        sendOtpBtn.disabled = true;
+        sendOtpBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+        try {
+          const res = await fetch('http://localhost:5001/api/verify-aadhaar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ uid: aadhaar })
+          });
+
+          if (!res.ok) throw new Error('UID not found');
+
+          const data = await res.json();
+          currentUser = data.user;
+          sessionStorage.setItem('user', JSON.stringify(data.user));
+
+          const maskedPhone = 'XXXXXXXX' + data.user.phone.slice(-2);
+          otpSentMessage.textContent = `OTP sent to ${maskedPhone}`;
+          
+          otpSentMessage.classList.remove('hidden');
+
+          otpInput.disabled = false;
+          otpInput.value = '';
+        } catch (err) {
+          alert("Aadhaar number not found. Please check and try again.");
+          sendOtpBtn.disabled = false;
+          sendOtpBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+          otpSentMessage.classList.add('hidden');
+          otpInput.disabled = true;
+        }
+      });
+
+      otpInput.addEventListener('input', () => {
+        if (/^\d{6}$/.test(otpInput.value)) {
+          loginBtn.disabled = false;
+          loginBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        } else {
+          loginBtn.disabled = true;
+          loginBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+      });
+
+      loginBtn.addEventListener('click', () => {
+        if (otpInput.value === '123456') {
+          window.location.href = 'login.html';
+        } else {
+          alert("Invalid OTP. Please try again.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

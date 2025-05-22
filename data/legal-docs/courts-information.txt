@@ -1,0 +1,138 @@
+# Indian Court System
+
+## Judicial Structure
+The Indian judicial system follows a unified, hierarchical structure with the Supreme Court at the apex, followed by High Courts at the state level, and subordinate courts at district and local levels.
+
+### Supreme Court
+The Supreme Court of India is the highest judicial forum and final court of appeal. Located in New Delhi, it consists of the Chief Justice and 33 other judges.
+
+Key features:
+1. Has original, appellate, and advisory jurisdiction
+2. Guardian of the Constitution
+3. Decisions binding on all courts in India
+4. Power of judicial review
+
+The Supreme Court hears:
+- Appeals from High Courts
+- Cases involving substantial questions of law
+- Disputes between states and the central government
+- Fundamental rights enforcement through writ petitions
+
+### High Courts
+Each state has a High Court, with some High Courts having jurisdiction over more than one state or union territory.
+
+Key features:
+1. Principal civil courts of original jurisdiction in the state
+2. Power to issue writs for enforcement of fundamental rights
+3. Supervisory jurisdiction over subordinate courts
+4. Appeals from district courts
+
+### District Courts
+District Courts serve as the first court of instance for civil and criminal cases.
+
+Civil Courts hierarchy:
+1. District Judge (highest in district)
+2. Additional District Judge
+3. Civil Judge (Senior Division)
+4. Civil Judge (Junior Division)
+
+Criminal Courts hierarchy:
+1. Sessions Judge
+2. Chief Judicial Magistrate
+3. Judicial Magistrate First Class
+4. Judicial Magistrate Second Class
+
+### Specialized Courts
+Several specialized courts and tribunals exist for specific matters:
+
+1. **Family Courts**: Matrimonial disputes, custody, maintenance
+2. **Consumer Forums**: Consumer dispute resolution
+3. **Labour Courts**: Industrial and employment disputes
+4. **Tax Tribunals**: Income tax, customs, excise matters
+5. **Administrative Tribunals**: Service matters of government employees
+6. **Debt Recovery Tribunals**: Recovery of debts to banks and financial institutions
+7. **National Green Tribunal**: Environmental cases
+
+## How to Approach Courts
+
+### Filing a Civil Case
+1. **Complaint Drafting**: Prepare a plaint with:
+   - Names and addresses of parties
+   - Facts of the case
+   - Cause of action
+   - Relief sought
+
+2. **Court Fee**: Pay the required court fee based on the value of the suit.
+
+3. **Filing**: Submit the plaint with supporting documents to the appropriate court.
+
+4. **Scrutiny**: Court registry checks for defects.
+
+5. **Summons**: Court issues summons to the opposite party.
+
+6. **Trial Process**: Includes evidence, arguments, and judgment.
+
+### Filing a Criminal Case
+1. **First Information Report (FIR)**: For cognizable offenses, file an FIR at the police station.
+
+2. **Private Complaint**: If police don't register FIR, file a private complaint with the Magistrate under Section 200 of CrPC.
+
+3. **Investigation**: Police investigate and file a chargesheet or closure report.
+
+4. **Trial**: Includes framing of charges, evidence, arguments, and judgment.
+
+### Filing Public Interest Litigation (PIL)
+1. **Petition Drafting**: Prepare a petition highlighting the public interest issue.
+
+2. **Filing**: Submit to the High Court or Supreme Court registry.
+
+3. **Admission**: Court decides whether to admit the PIL.
+
+4. **Proceedings**: If admitted, notices are issued to respondents and hearings commence.
+
+### Which Court to Approach
+Determining the appropriate court depends on:
+
+1. **Subject Matter**:
+   - Property disputes: Civil Courts
+   - Criminal offenses: Criminal Courts
+   - Constitutional issues: High Courts or Supreme Court
+   - Matrimonial disputes: Family Courts
+
+2. **Territorial Jurisdiction**:
+   - Where the defendant resides
+   - Where the cause of action arose
+   - Where the property is situated
+
+3. **Pecuniary Jurisdiction**:
+   - Value of the suit determines which level of court has jurisdiction
+
+4. **Appellate Structure**:
+   - Appeals from lower courts go to specified higher courts
+   - District Court decisions appealed to High Courts
+   - High Court decisions appealed to Supreme Court
+
+## Legal Aid
+For those who cannot afford legal representation:
+
+1. **National Legal Services Authority (NALSA)** and state counterparts provide free legal aid.
+
+2. **Eligibility**:
+   - Members of Scheduled Castes/Tribes
+   - Women and children
+   - Victims of trafficking
+   - Persons with disabilities
+   - Industrial workmen
+   - Persons in custody
+   - Persons with annual income below specified limit
+
+3. **Services Provided**:
+   - Free legal representation
+   - Legal advice
+   - Payment of court fees
+   - Lok Adalat (alternative dispute resolution)
+
+4. **How to Apply**:
+   - Apply to the Legal Services Authority in your district
+   - Visit the legal aid clinic at the court complex
+   - Contact through toll-free helpline: 15100 

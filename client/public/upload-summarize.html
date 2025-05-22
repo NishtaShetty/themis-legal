@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Themis AI - Upload & Summarize</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    /* Optional: Add any custom styles not covered by Tailwind */
+    /* You might need to adjust the file input button styling based on your overall theme */
+    input[type="file"]::file-selector-button {
+        margin-right: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem; /* Tailwind rounded-md */
+        border: 0;
+        font-size: 0.875rem; /* Tailwind text-sm */
+        font-weight: 600; /* Tailwind font-semibold */
+        background-color: #eff6ff; /* Tailwind bg-blue-50 */
+        color: #1d4ed8; /* Tailwind text-blue-700 */
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out;
+    }
+
+    input[type="file"]::file-selector-button:hover {
+        background-color: #dbeafe; /* Tailwind hover:bg-blue-100 */
+    }
+
+    /* Style for the main container padding on small screens */
+    @media (max-width: 640px) {
+        .container {
+            padding: 0 1.5rem; /* Adjust padding for small screens */
+        }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
+
+  <!-- Nav Bar -->
+  <nav class="bg-gray-800 px-6 py-4 flex justify-between items-center">
+    <div>
+      <a href="login.html" class="text-blue-400 font-bold text-xl hover:text-blue-600">Themis AI</a>
+    </div>
+    <ul class="flex space-x-6">
+      <li><a href="chatbot.html" class="hover:text-blue-600">Chatbot</a></li>
+      <li><a href="upload-summarize.html" class="text-blue-400 font-semibold">Upload & Summarize</a></li>
+      <li><a href="doc-generator.html" class="hover:text-blue-600">Doc Generator</a></li>
+    </ul>
+    <div class="text-right hidden" id="profileInfo">
+      <p class="font-semibold" id="profileName"></p>
+      <p class="text-sm text-gray-400" id="profileAadhaar"></p>
+      <p class="text-sm text-gray-400" id="profileDOB"></p>
+      <p class="text-sm text-gray-400" id="profileAddress"></p>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="flex-grow container mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold mb-6">Upload & Summarize Legal Documents</h1>
+    <p class="mb-8 text-gray-300">Upload contracts, FIRs, or court orders and get concise AI-generated summaries in simple language.</p>
+
+    <!-- Document Processor Section (Integrated from React component logic) -->
+    <div class="bg-gray-800 p-6 rounded-lg max-w-4xl mx-auto shadow-md">
+
+      <!-- File Upload -->
+      <div class="mb-6">
+        <label for="fileInput" class="block text-white text-sm font-medium mb-2">Choose document to upload:</label>
+        <div class="flex items-center gap-4">
+          <input type="file" id="fileInput" accept=".txt,.pdf,.doc,.docx" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"/>
+          <button id="clearFileBtn" class="text-red-400 hover:text-red-600 text-sm font-medium hidden">Clear File</button>
+        </div>
+        <div id="fileInfo" class="mt-2 text-sm text-gray-400"></div>
+      </div>
+
+      <!-- Text Content -->
+      <div class="mb-6">
+        <label for="textContent" class="block text-white text-sm font-medium mb-2">Text Content:</label>
+        <textarea id="textContent" placeholder="Enter or paste text here..." class="w-full h-40 border border-gray-700 p-2 rounded bg-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+        <p id="textLengthInfo" class="mt-2 text-sm text-gray-400 hidden"></p>
+      </div>
+
+      <!-- Error Message -->
+      <div id="error" class="mb-4 p-3 bg-red-900 border border-red-700 text-red-300 rounded hidden"></div>
+
+      <!-- Action Buttons -->
+      <div class="flex gap-4 mb-6">
+        <button id="summarizeBtn" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:bg-gray-500 disabled:cursor-not-allowed">
+          Summarize
+        </button>
+
+        <div class="flex items-center gap-2">
+          <select id="targetLanguage" class="border border-gray-700 p-2 rounded bg-gray-700 text-white">
+            <option value="hi">Hindi</option>
+          </select>
+          <button id="translateBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:bg-gray-500 disabled:cursor-not-allowed">
+            Translate
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading Indicator -->
+      <div id="loadingIndicator" class="text-center text-blue-400 mb-4 hidden">Processing...</div>
+
+      <!-- Results -->
+      <div id="summaryResult" class="mt-6 p-4 bg-gray-700 rounded-md border border-gray-600 text-white hidden">
+        <h3 class="font-bold mb-2">Summary:</h3>
+        <div id="summaryContent"></div>
+        <!-- Add a button to translate the summary -->
+        <div class="mt-4 flex items-center gap-2">
+             <button id="translateSummaryBtn" class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-800 disabled:bg-gray-500 disabled:cursor-not-allowed text-sm">
+                Translate Summary
+            </button>
+             <select id="summaryTargetLanguage" class="border border-gray-700 p-2 rounded bg-gray-700 text-white text-sm">
+                <option value="kn">Kannada</option>
+                <option value="hi">Hindi</option>
+             </select>
+        </div>
+         <div id="translatedSummaryResult" class="mt-4 p-6 bg-blue-800 rounded-xl border-2 border-blue-600 text-white hidden">
+             <h4 class="font-bold text-xl mb-4 text-blue-200">Translated Summary</h4>
+             <div id="translatedSummaryContent" class="text-blue-100 leading-relaxed whitespace-pre-wrap"></div>
+         </div>
+      </div>
+
+      <div id="translationResult" class="mt-6 p-4 bg-gray-700 rounded-md border border-gray-600 text-white hidden">
+        <h3 class="font-bold mb-2">Translation:</h3>
+        <div id="translatedTextContent"></div>
+      </div>
+
+    </div>
+
+
+  </main>
+
+  <footer class="bg-gray-800 text-center py-4 text-gray-400">
+    &copy; 2025 Themis AI Legal Aid Platform
+  </footer>
+
+  <!-- Script to load user profile -->
+  <script>
+    window.onload = function () {
+      const user = JSON.parse(sessionStorage.getItem('user'));
+
+      if (!user) {
+        console.log('User not logged in, redirecting...');
+        // alert('Please log in first.'); // Avoid alert for cleaner UX
+        window.location.href = 'index.html'; // Assuming index.html is your login page
+        return;
+      }
+
+      console.log('User logged in:', user);
+
+      // Update profile info
+      document.getElementById('profileName').textContent = user.name || ''; // Add fallback
+      document.getElementById('profileAadhaar').textContent = `Aadhaar: ${user.uid || 'N/A'}`; // Add fallback
+      document.getElementById('profileDOB').textContent = `DOB: ${user.dob || 'N/A'}`; // Add fallback
+
+      // Format address nicely
+      const addressParts = [
+        user.street,
+        user.vtc,
+        user.subdist,
+        user.district,
+        user.state,
+        user.pincode
+      ].filter(part => part && part.trim() !== ''); // Filter out empty parts
+      document.getElementById('profileAddress').textContent = `Address: ${addressParts.join(', ') || 'N/A'}`; // Join non-empty parts
+
+      document.getElementById('profileInfo').classList.remove('hidden');
+    };
+  </script>
+
+  <script>
+    // --- Start of Document Processing Script ---
+    const fileInput = document.getElementById('fileInput');
+    const textContent = document.getElementById('textContent');
+    const summarizeBtn = document.getElementById('summarizeBtn');
+    const translateBtn = document.getElementById('translateBtn');
+    const targetLanguageSelect = document.getElementById('targetLanguage');
+    const summaryResultDiv = document.getElementById('summaryResult');
+    const summaryContentDiv = document.getElementById('summaryContent');
+    const translationResultDiv = document.getElementById('translationResult');
+    const translatedTextContentDiv = document.getElementById('translatedTextContent');
+    const errorDiv = document.getElementById('error');
+    const fileInfoDiv = document.getElementById('fileInfo');
+    const textLengthInfo = document.getElementById('textLengthInfo');
+    const clearFileBtn = document.getElementById('clearFileBtn');
+    const loadingIndicator = document.getElementById('loadingIndicator');
+
+    // New elements for summary translation
+    const translateSummaryBtn = document.getElementById('translateSummaryBtn');
+    const summaryTargetLanguageSelect = document.getElementById('summaryTargetLanguage');
+    const translatedSummaryResultDiv = document.getElementById('translatedSummaryResult');
+    const translatedSummaryContentDiv = document.getElementById('translatedSummaryContent');
+    console.log('translateSummaryBtn:', translateSummaryBtn); // Debug: confirm button exists
+
+
+    let selectedFile = null; // To keep track of the selected file
+
+    // Initial state: hide elements
+    errorDiv.classList.add('hidden');
+    summaryResultDiv.classList.add('hidden');
+    translationResultDiv.classList.add('hidden');
+    textLengthInfo.classList.add('hidden');
+    clearFileBtn.classList.add('hidden');
+    loadingIndicator.classList.add('hidden');
+    translatedSummaryResultDiv.classList.add('hidden'); // Hide translated summary initially
+
+    const showLoading = (isLoading) => {
+        if (isLoading) {
+            loadingIndicator.classList.remove('hidden');
+            summarizeBtn.disabled = true;
+            translateBtn.disabled = true;
+            summarizeBtn.textContent = 'Processing...';
+            translateBtn.textContent = 'Processing...';
+        } else {
+            loadingIndicator.classList.add('hidden');
+            // Re-enable based on text content
+            const hasText = textContent.value.trim() !== '';
+            summarizeBtn.disabled = !hasText;
+            translateBtn.disabled = !hasText;
+            summarizeBtn.textContent = 'Summarize';
+            translateBtn.textContent = 'Translate';
+        }
+    };
+
+    const displayError = (message) => {
+        errorDiv.textContent = message;
+        errorDiv.classList.remove('hidden');
+    };
+
+    const clearResults = () => {
+        summaryResultDiv.classList.add('hidden');
+        summaryContentDiv.textContent = '';
+        translationResultDiv.classList.add('hidden');
+        translatedTextContentDiv.textContent = '';
+        errorDiv.classList.add('hidden');
+        errorDiv.textContent = '';
+        textLengthInfo.classList.add('hidden');
+        textLengthInfo.textContent = '';
+        translatedSummaryResultDiv.classList.add('hidden'); // Clear translated summary
+        translatedSummaryContentDiv.textContent = '';
+    };
+
+    const handleFileUpload = async (event) => {
+        const file = event.target.files[0];
+        if (!file) {
+            selectedFile = null;
+            fileInfoDiv.textContent = '';
+            textContent.value = '';
+            clearResults();
+            showLoading(false);
+            clearFileBtn.classList.add('hidden');
+            // Reset the input element value so the same file can be selected again
+            if (fileInput) fileInput.value = '';
+            return;
+        }
+
+        selectedFile = file;
+        clearResults(); // Clear previous results on new file upload
+        showLoading(true);
+        fileInfoDiv.textContent = `Selected file: ${file.name} (${(file.size/1024).toFixed(2)} KB)`;
+        clearFileBtn.classList.remove('hidden');
+
+        // First read the file content client-side
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            const content = e.target.result;
+            console.log('File content loaded:', content);
+            if (!content || content.trim() === '') {
+                displayError('The uploaded file is empty or could not be read.');
+                textContent.value = '';
+                fileInfoDiv.textContent = ''; // Clear file info
+                selectedFile = null;
+                clearFileBtn.classList.add('hidden');
+                 if (fileInput) fileInput.value = ''; // Reset input
+                 showLoading(false);
+                return;
+            }
+            textContent.value = content;
+            textLengthInfo.textContent = `Text length: ${content.length} characters`;
+            textLengthInfo.classList.remove('hidden');
+            showLoading(false); // Hide loading after content is set
+            // Enable buttons now that text is available
+            summarizeBtn.disabled = false;
+            translateBtn.disabled = false;
+            // Also enable Translate Summary if summary is present
+            if (summaryContentDiv.textContent.trim() !== '') {
+                translateSummaryBtn.disabled = false;
+            }
+
+            // Optional: You can still send the file to the backend after reading
+            // if your backend needs to process or store it.
+            // const formData = new FormData();
+            // formData.append('file', selectedFile);
+            // try {
+            //     const response = await fetch('http://localhost:5001/api/document/upload', {
+            //         method: 'POST',
+            //         body: formData
+            //     });
+            //     const uploadData = await response.json();
+            //     console.log('File uploaded response:', uploadData);
+            // } catch (uploadError) {
+            //     console.error('Upload error:', uploadError);
+            //     // displayError('Failed to upload file to server.');
+            //     // Decide if you want to clear text if upload fails but read succeeds
+            // }
+        };
+
+        reader.onerror = (error) => {
+            console.error('Error reading file:', error);
+            displayError('Error reading file content.');
+            textContent.value = '';
+            fileInfoDiv.textContent = '';
+            selectedFile = null;
+            clearFileBtn.classList.add('hidden');
+            if (fileInput) fileInput.value = '';
+            showLoading(false);
+        };
+
+        // Check file type before reading (basic client-side check)
+         const allowedExtensions = ['.txt', '.pdf', '.doc', '.docx'];
+         const fileExtension = file.name.toLowerCase().slice(file.name.lastIndexOf('.'));
+
+         if (!allowedExtensions.includes(fileExtension)) {
+             displayError('Invalid file type. Only .txt, .pdf, .doc, and .docx files are allowed.');
+             textContent.value = '';
+             fileInfoDiv.textContent = '';
+             selectedFile = null;
+             clearFileBtn.classList.add('hidden');
+              if (fileInput) fileInput.value = '';
+              showLoading(false);
+             return;
+         }
+
+        // For simplicity and immediate text display, always read as text.
+        // NOTE: Reading binary files (.pdf, .doc, .docx) as text will result in garbled output.
+        // A more advanced implementation would require a backend service or library
+        // to extract text from these formats.
+        reader.readAsText(file);
+    };
+
+    const handleSummarize = async () => {
+        clearResults(); // Clear previous results
+        const text = textContent.value.trim();
+        if (!text) {
+            displayError('Please upload a file or enter text first.');
+            return;
+        }
+
+        showLoading(true);
+
+        try {
+            console.log('Sending text for summarization:', text);
+            const response = await fetch('http://localhost:5001/api/document/summarize', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text })
+            });
+
+            const data = await response.json();
+            console.log('Summarization response:', data);
+
+            if (response.ok && data.summary) {
+                summaryContentDiv.textContent = data.summary;
+                summaryResultDiv.classList.remove('hidden');
+                 // Show translate summary button after summary is available
+                translateSummaryBtn.disabled = false;
+                console.log('Summary generated, translateSummaryBtn enabled');
+            } else {
+                displayError(data.error || 'Failed to summarize text.');
+            }
+        } catch (err) {
+            console.error('Summarization error:', err);
+            displayError('Error connecting to server or summarizing.');
+        } finally {
+            showLoading(false);
+        }
+    };
+
+    const handleTranslate = async () => {
+         clearResults(); // Clear previous results
+        const text = textContent.value.trim();
+        const targetLanguage = targetLanguageSelect.value;
+        if (!text || !targetLanguage) {
+            displayError('Please upload a file/enter text and select a target language first.');
+            return;
+        }
+
+        showLoading(true);
+
+        try {
+             console.log(`Sending text for translation to ${targetLanguage}:`, text);
+            const response = await fetch('http://localhost:5001/api/document/translate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text, targetLanguage })
+            });
+
+            const data = await response.json();
+            console.log('Translation response:', data);
+
+            if (response.ok && data.translatedText) {
+                translatedTextContentDiv.textContent = data.translatedText;
+                translationResultDiv.classList.remove('hidden');
+            } else {
+                 displayError(data.error || 'Failed to translate text.');
+            }
+        } catch (err) {
+             console.error('Translation error:', err);
+            displayError('Error connecting to server or translating.');
+        } finally {
+            showLoading(false);
+        }
+    };
+
+    const handleTranslateSummary = async () => {
+        console.log('handleTranslateSummary called'); // Debug
+        translatedSummaryResultDiv.classList.add('hidden'); // Hide previous translated summary
+        translatedSummaryContentDiv.textContent = '';
+        errorDiv.classList.add('hidden');
+        errorDiv.textContent = '';
+
+        const textToTranslate = summaryContentDiv.textContent.trim(); // Get text from summary div
+        const targetLanguage = summaryTargetLanguageSelect.value;
+
+        if (!textToTranslate) {
+            displayError('No summary available to translate.');
+            return;
+        }
+         if (!targetLanguage) { // Should not happen with default, but good check
+            displayError('No target language selected for summary translation.');
+            return;
+        }
+
+        showLoading(true); // Show loading indicator
+
+        try {
+            console.log(`Sending summary for translation to ${targetLanguage}:`, textToTranslate);
+            const response = await fetch('http://localhost:5001/api/document/translate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ text: textToTranslate, targetLanguage })
+            });
+
+            const data = await response.json();
+            console.log('Translated summary response:', data);
+
+            if (response.ok && data.translatedText) {
+                console.log('Received translated text:', data.translatedText); // Debug log
+                translatedSummaryContentDiv.textContent = data.translatedText;
+                translatedSummaryResultDiv.classList.remove('hidden');
+            } else {
+                 // Display error from API response if available
+                 displayError(data.error || 'Failed to translate summary.');
+            }
+        } catch (err) {
+             console.error('Translated summary error:', err);
+            displayError('Error connecting to server or translating summary.');
+        } finally {
+            showLoading(false); // Hide loading indicator
+        }
+    };
+
+
+    const handleClearFile = () => {
+        selectedFile = null;
+        if (fileInput) fileInput.value = ''; // Reset the input element
+        fileInfoDiv.textContent = '';
+        textContent.value = '';
+        clearResults();
+        showLoading(false);
+        clearFileBtn.classList.add('hidden');
+         // Disable buttons when text is cleared
+        summarizeBtn.disabled = true;
+        translateBtn.disabled = true;
+        translateSummaryBtn.disabled = true; // Disable translate summary button
+    };
+
+    // Event Listeners
+    fileInput.addEventListener('change', handleFileUpload);
+    summarizeBtn.addEventListener('click', handleSummarize);
+    translateBtn.addEventListener('click', handleTranslate);
+    clearFileBtn.addEventListener('click', handleClearFile);
+    if (translateSummaryBtn) {
+        translateSummaryBtn.addEventListener('click', handleTranslateSummary);
+        console.log('translateSummaryBtn event listener attached');
+    } else {
+        console.error('translateSummaryBtn not found in DOM');
+    }
+    textContent.addEventListener('input', () => {
+        // Enable/disable buttons based on text content
+        const hasText = textContent.value.trim() !== '';
+        summarizeBtn.disabled = !hasText || loadingIndicator.classList.contains('hidden');
+        translateBtn.disabled = !hasText || loadingIndicator.classList.contains('hidden');
+        
+        // Show/hide text length info
+        if(textContent.value.length > 0) {
+            textLengthInfo.textContent = `Text length: ${textContent.value.length} characters`;
+            textLengthInfo.classList.remove('hidden');
+        } else {
+            textLengthInfo.classList.add('hidden');
+        }
+
+    });
+
+     // Initial button state (disabled if text is empty)
+    const hasTextInitially = textContent.value.trim() !== '';
+    summarizeBtn.disabled = !hasTextInitially;
+    translateBtn.disabled = !hasTextInitially;
+    translateSummaryBtn.disabled = true; // Disable translate summary initially
+
+    // --- End of Document Processing Script ---
+  </script>
+
+</body>
+</html>
+

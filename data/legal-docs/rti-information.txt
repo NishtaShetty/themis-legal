@@ -1,0 +1,87 @@
+# Right to Information (RTI)
+
+## Right to Information Act
+The Right to Information Act (RTI) is a law enacted in India that sets out the rules and procedures regarding citizens' right to information. It was passed in 2005 and came into effect on October 12, 2005. The RTI Act provides citizens the right to request access to information held by public authorities.
+
+Key features of the RTI Act include:
+1. Universal right to information for all citizens
+2. Obligation on public authorities to disclose information proactively
+3. Independent Information Commissions at central and state levels
+4. Time-bound response to information requests
+5. Exemptions to disclosure in certain cases
+
+### How to File an RTI Application
+Filing an RTI application is a straightforward process:
+
+1. **Identify the Public Information Officer (PIO)**: Determine which government department holds the information you seek and find their PIO.
+
+2. **Prepare your application**: Write a clear and specific request. Include:
+   - Your full name and contact details
+   - Specific information requested (be precise)
+   - Period for which information is sought
+   - Whether you belong to Below Poverty Line (BPL) category (if applicable)
+
+3. **Application fee**: Pay the application fee (usually Rs. 10) through:
+   - Cash payment at the office
+   - Demand draft
+   - Banker's cheque
+   - Indian Postal Order
+   - Court fee stamp
+   - Online payment (where available)
+   
+   Note: BPL category applicants are exempt from fees.
+
+4. **Submit your application**: Submit your application to the PIO:
+   - In person
+   - By post
+   - Online (on departments that have online RTI portals)
+
+5. **Keep records**: Maintain copies of all correspondence and application numbers.
+
+### RTI Response Timeline
+- The PIO must provide information within 30 days
+- If information concerns life or liberty, it must be provided within 48 hours
+- If the application is transferred to another department, an additional 5 days are allowed
+- If a third party is involved, 40 days are allowed
+
+### Appeals Process for RTI
+If you are unsatisfied with the response (or lack thereof), you can file appeals:
+
+1. **First Appeal**: File with the First Appellate Authority (senior officer of the same department)
+   - Must be filed within 30 days of response or expected response date
+   - Should be decided within 30 days (extendable to 45 days)
+
+2. **Second Appeal**: If still unsatisfied, file with the Information Commission
+   - Central Information Commission (for central departments)
+   - State Information Commission (for state departments)
+   - Must be filed within 90 days of first appeal decision
+   - No specific timeline for resolution
+
+3. **Writ Petition**: As a last resort, you can file a writ petition in the High Court.
+
+### Courts to Approach for RTI Issues
+For RTI-related legal issues, you would typically approach:
+
+1. **Information Commissions**: Not courts per se, but quasi-judicial bodies that hear second appeals
+   - Central Information Commission (for central government departments)
+   - State Information Commissions (for state government departments)
+
+2. **High Courts**: For filing writ petitions against decisions of Information Commissions
+   - File under Article 226 of the Constitution
+   - Appropriate when there is a violation of fundamental rights or legal procedures
+
+3. **Supreme Court**: For appeals against High Court decisions
+   - Only in cases involving substantial questions of law
+   - Or when fundamental rights are concerned
+
+### RTI Penalties and Enforcement
+The RTI Act provides for penalties against PIOs who:
+- Refuse to receive an application
+- Delay providing information without reasonable cause
+- Knowingly provide incorrect information
+- Destroy information that was requested
+
+Penalties can include:
+- Fine of Rs. 250 per day, up to a maximum of Rs. 25,000
+- Disciplinary action under service rules
+- Compensation to the complainant 

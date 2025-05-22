@@ -1,0 +1,24 @@
+# Node dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# OS/System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# VS Code settings
+.vscode/
+
+* text=auto
+data/llama-2-7b-chat.Q4_*

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Themis AI - Document Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    /* For preview containers */
+    .template-container {
+      display: none;
+    }
+    .template-container.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans min-h-screen flex flex-col">
+
+  <!-- Nav Bar -->
+  <nav class="bg-gray-800 px-6 py-4 flex justify-between items-center">
+    <div>
+      <a href="login.html" class="text-blue-400 font-bold text-xl hover:text-blue-600">Themis AI</a>
+    </div>
+    <ul class="flex space-x-6">
+      <li><a href="chatbot.html" class="hover:text-blue-600">Chatbot</a></li>
+      <li><a href="upload-summarize.html" class="hover:text-blue-600">Upload & Summarize</a></li>
+      <li><a href="doc-generator.html" class="text-blue-400 font-semibold">Doc Generator</a></li>
+    </ul>
+    <div class="text-right hidden" id="profileInfo">
+      <p class="font-semibold" id="profileName"></p>
+      <p class="text-sm text-gray-400" id="profileAadhaar"></p>
+      <p class="text-sm text-gray-400" id="profileDOB"></p>
+      <p class="text-sm text-gray-400" id="profileAddress"></p>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="flex-grow container mx-auto px-6 py-12 max-w-4xl">
+    <h1 class="text-3xl font-bold mb-6 text-center">Legal Document Generator</h1>
+    <p class="mb-8 text-gray-400 text-center">Generate petitions, RTIs, rental agreements and more by filling the forms below.</p>
+
+    <!-- Document Type Selector -->
+    <div class="mb-8">
+      <label for="docType" class="block mb-2 font-semibold text-gray-300">Select Document Type:</label>
+      <select id="docType" name="docType" class="w-full p-3 mb-4 rounded bg-gray-700 text-white" onchange="showTemplate()">
+        <option value="" selected disabled>Choose a document type...</option>
+        <option value="rti">RTI Application</option>
+        <option value="rental">Rental Agreement</option>
+      </select>
+    </div>
+
+    <div id="rti-template" class="template-container bg-gray-800 p-6 rounded-lg space-y-4">
+  <h2 class="text-xl font-semibold mb-4">RTI Application</h2>
+  <form id="rti-form" onsubmit="event.preventDefault(); generateRTI();" class="space-y-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label for="rti-date" class="block mb-1 font-semibold">Date</label>
+        <input type="date" id="rti-date" name="DATE" class="w-full p-2 rounded bg-gray-700 text-white" required />
+      </div>
+
+      <div>
+        <label for="rti-category" class="block mb-1 font-semibold">Category</label>
+        <select id="rti-category" name="CATEGORY" class="w-full p-2 rounded bg-gray-700 text-white" required>
+          <option value="">Select</option>
+          <option value="APL">APL</option>
+          <option value="BPL">BPL</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="rti-department-name" class="block mb-1 font-semibold">Department Name</label>
+        <select id="rti-department-name" name="DEPARTMENT_NAME" class="w-full p-2 rounded bg-gray-700 text-white" onchange="fillDeptAddress()" required>
+          <option value="">Select</option>
+          <option value="Ministry of Health">Ministry of Health</option>
+          <option value="Ministry of Education">Ministry of Education</option>
+          <option value="Municipal Corporation">Municipal Corporation</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="rti-department-address" class="block mb-1 font-semibold">Department Address</label>
+        <textarea id="rti-department-address" name="DEPARTMENT_ADDRESS" rows="2" class="w-full p-2 rounded bg-gray-700 text-white" readonly></textarea>
+      </div>
+
+      <div>
+        <label for="rti-name" class="block mb-1 font-semibold">Applicant Name</label>
+        <input type="text" id="rti-name" name="APPLICANT_NAME" class="w-full p-2 rounded bg-gray-700 text-white" readonly />
+      </div>
+
+      <div>
+        <label for="rti-contact" class="block mb-1 font-semibold">Applicant Contact</label>
+        <input type="text" id="rti-contact" name="APPLICANT_CONTACT" class="w-full p-2 rounded bg-gray-700 text-white" readonly />
+      </div>
+
+      <div>
+        <label for="rti-email" class="block mb-1 font-semibold">Applicant Email</label>
+        <input type="email" id="rti-email" name="APPLICANT_EMAIL" class="w-full p-2 rounded bg-gray-700 text-white" readonly />
+      </div>
+
+      <div>
+        <label for="rti-address" class="block mb-1 font-semibold">Applicant Address</label>
+        <textarea id="rti-address" name="APPLICANT_ADDRESS" rows="3" class="w-full p-2 rounded bg-gray-700 text-white" readonly></textarea>
+      </div>
+
+      <div>
+        <label for="rti-docs" class="block mb-1 font-semibold">Other Documents (Aadhaar)</label>
+        <input type="text" id="rti-docs" name="OTHER_DOCUMENTS" class="w-full p-2 rounded bg-gray-700 text-white" readonly />
+      </div>
+
+      <div>
+        <label for="rti-fee" class="block mb-1 font-semibold">Fee Amount (INR)</label>
+        <input type="number" id="rti-fee" name="FEE_AMOUNT" value="10" class="w-full p-2 rounded bg-gray-700 text-white" readonly />
+      </div>
+
+      <div>
+        <label for="rti-fee-words" class="block mb-1 font-semibold">Fee in Words</label>
+        <input type="text" id="rti-fee-words" name="FEE_IN_WORDS" value="Ten Rupees Only" class="w-full p-2 rounded bg-gray-700 text-white" readonly />
+      </div>
+
+<div>
+        <label for="rti-payment" class="block mb-1 font-semibold">Payment Mode</label>
+        <input type="text" id="rti-payment" name="PAYMENT_MODE" value="Online Payment" class="w-full p-2 rounded bg-gray-700 text-white" readonly />
+      </div>
+    </div>
+
+    <div>
+      <label for="rti-info" class="block mb-1 font-semibold">Information Requested</label>
+      <textarea id="rti-info" name="INFORMATION_REQUESTED" rows="5" class="w-full p-2 rounded bg-gray-700 text-white" required></textarea>
+    </div>
+
+    <button type="submit" class="mt-6 w-full bg-green-600 hover:bg-green-700 py-3 rounded font-semibold">Generate RTI Application</button>
+  </form>
+
+  <div id="rti-preview" class="mt-6 p-4 bg-gray-700 rounded text-gray-100 whitespace-pre-wrap hidden"></div>
+</div>
+
+<script>
+  function fillDeptAddress() {
+    const deptName = document.getElementById("rti-department-name").value;
+    const addressField = document.getElementById("rti-department-address");
+
+    const deptMap = {
+      "Ministry of Health": "Nirman Bhawan, Bengaluru - 560011",
+      "Ministry of Education": "Shastri Bhawan, Bengaluru - 560001",
+      "Municipal Corporation": "BBMP, Bengaluru"
+    };
+
+    addressField.value = deptMap[deptName] || "";
+  }
+
+  function populateUserData(userData) {
+    document.getElementById("rti-name").value = userData.name;
+    document.getElementById("rti-address").value = userData.address;
+    document.getElementById("rti-contact").value = userData.phone;
+    document.getElementById("rti-email").value = userData.email;
+    document.getElementById("rti-docs").value = userData.aadhaar;
+  }
+
+  // Example user data from login (replace with actual session data)
+  document.addEventListener("DOMContentLoaded", () => {
+    const loggedInUser = {
+      name: "Navin",
+      address: "123 Park Lane, Andheri, Mumbai Suburban, Mumbai, Maharashtra, 400053",
+      phone: "9876543210",
+      email: "navin@example.com",
+      aadhaar: "XXXX-XXXX-1234"
+    };
+    populateUserData(loggedInUser);
+  });
+</script>
+
+
+    <!-- Rental Agreement Form -->
+    <div id="rental-template" class="template-container bg-gray-800 p-6 rounded-lg space-y-4">
+      <h2 class="text-xl font-semibold mb-4">Rental Agreement Form</h2>
+      <form id="rental-form" onsubmit="event.preventDefault(); generateRentalAgreement();">
+        <input type="text" hidden name="DOC_TYPE" value="Rental Agreement" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="rental-date" class="block mb-1 font-semibold">Date</label>
+            <input type="date" id="rental-date" name="DATE" class="w-full p-2 rounded bg-gray-700 text-white" required />
+          </div>
+          <div>
+            <label for="rental-landlord-name" class="block mb-1 font-semibold">Landlord Name</label>
+            <input type="text" id="rental-landlord-name" name="LANDLORD_NAME" class="w-full p-2 rounded bg-gray-700 text-white" required />
+          </div>
+          <div>
+            <label for="rental-tenant-name" class="block mb-1 font-semibold">Tenant Name</label>
+            <input type="text" id="rental-tenant-name" name="TENANT_NAME" class="w-full p-2 rounded bg-gray-700 text-white" required />
+          </div>
+          <div>
+            <label for="rental-address" class="block mb-1 font-semibold">Property Address</label>
+            <textarea id="rental-address" name="PROPERTY_ADDRESS" rows="3" class="w-full p-2 rounded bg-gray-700 text-white" required></textarea>
+          </div>
+          <div>
+            <label for="rental-terms" class="block mb-1 font-semibold">Terms & Conditions</label>
+            <textarea id="rental-terms" name="TERMS" rows="5" class="w-full p-2 rounded bg-gray-700 text-white" required></textarea>
+          </div>
+          <div>
+            <label for="rental-rent" class="block mb-1 font-semibold">Monthly Rent (INR)</label>
+            <input type="number" id="rental-rent" name="RENT" class="w-full p-2 rounded bg-gray-700 text-white" required />
+          </div>
+          <div>
+            <label for="rental-deposit" class="block mb-1 font-semibold">Security Deposit (INR)</label>
+            <input type="number" id="rental-deposit" name="DEPOSIT" class="w-full p-2 rounded bg-gray-700 text-white" />
+          </div>
+          <div>
+            <label for="rental-duration" class="block mb-1 font-semibold">Rental Duration</label>
+            <input type="text" id="rental-duration" name="DURATION" class="w-full p-2 rounded bg-gray-700 text-white" placeholder="e.g. 1 year" />
+          </div>
+        </div>
+        <button type="submit" class="mt-6 w-full bg-green-600 hover:bg-green-700 py-3 rounded font-semibold">Generate Rental Agreement</button>
+      </form>
+
+      <div id="rental-preview" class="mt-6 p-4 bg-gray-700 rounded text-gray-100 whitespace-pre-wrap hidden"></div>
+    </div>
+
+  </main>
+
+  <script>
+    function showTemplate() {
+      const docType = document.getElementById('docType').value;
+      document.querySelectorAll('.template-container').forEach(div => div.classList.remove('active'));
+      if(docType) {
+        document.getElementById(docType + '-template').classList.add('active');
+      }
+    }
+
+    function generateRTI() {
+      const form = document.getElementById('rti-form');
+      const data = new FormData(form);
+      const date = data.get('DATE');
+      const deptName = data.get('DEPARTMENT_NAME');
+      const deptAddress = data.get('DEPARTMENT_ADDRESS');
+      const applicantName = data.get('APPLICANT_NAME');
+      const parentName = data.get('PARENT_NAME');
+      const applicantAddress = data.get('APPLICANT_ADDRESS');
+      const infoRequested = data.get('INFORMATION_REQUESTED');
+      const feeAmount = data.get('FEE_AMOUNT');
+      const feeWords = data.get('FEE_IN_WORDS');
+      const paymentMode = data.get('PAYMENT_MODE');
+      const category = data.get('CATEGORY');
+      const contact = data.get('APPLICANT_CONTACT');
+      const email = data.get('APPLICANT_EMAIL');
+      const otherDocs = data.get('OTHER_DOCUMENTS');
+
+      const rtiDoc = `
+Date: ${date}
+
+To,
+The Public Information Officer,
+${deptName},
+${deptAddress}
+
+Subject: Request for information under the Right to Information Act, 2005
+
+Respected Sir/Madam,
+
+I, ${applicantName}${parentName ? ', son/daughter of ' + parentName : ''}, residing at ${applicantAddress}, hereby request the following information under the Right to Information Act, 2005: ${infoRequested}.
+
+I am submitting a fee of INR ${feeAmount} (${feeWords}) towards the application fee to the department. 
+
+Category: ${category}
+Contact Number: ${contact || 'N/A'}
+Email ID: ${email || 'N/A'}
+
+Enclosed Documents: ${otherDocs}
+
+Kindly provide the requested information at the earliest possible.
+
+Thanking you,
+Yours faithfully,
+${applicantName}
+      `;
+
+      const preview = document.getElementById('rti-preview');
+      preview.textContent = rtiDoc.trim();
+      preview.classList.remove('hidden');
+    }
+
+    function generateRentalAgreement() {
+      const form = document.getElementById('rental-form');
+      const data = new FormData(form);
+      const date = data.get('DATE');
+      const landlord = data.get('LANDLORD_NAME');
+      const tenant = data.get('TENANT_NAME');
+      const address = data.get('PROPERTY_ADDRESS');
+      const terms = data.get('TERMS');
+      const rent = data.get('RENT');
+      const deposit = data.get('DEPOSIT');
+      const duration = data.get('DURATION');
+
+      const rentalDoc = `
+Date: ${date}
+
+RENTAL AGREEMENT
+
+This Rental Agreement is made on the above date between:
+
+Landlord: ${landlord}
+Tenant: ${tenant}
+
+Property Address:
+${address}
+
+Terms and Conditions:
+${terms}
+
+Monthly Rent: INR ${rent}
+Security Deposit: INR ${deposit || 'N/A'}
+Duration of Tenancy: ${duration || 'N/A'}
+
+Signed,
+Landlord: ________________________
+Tenant: ________________________
+      `;
+
+      const preview = document.getElementById('rental-preview');
+      preview.textContent = rentalDoc.trim();
+      preview.classList.remove('hidden');
+    }
+    
+    function linkDigilocker() {
+  alert("Redirecting to DigiLocker for document access...\n(Note: Actual API integration pending.)");
+  // You can integrate DigiLocker OAuth here in the future
+  // window.location.href = 'https://digilocker.meripehchaan.gov.in/public/oauth2/1/authorize?...';
+}
+
+function esignDocument(docType) {
+  alert(`Preparing to eSign the ${docType} document...\n(Note: eSign service integration coming soon.)`);
+  // In production: integrate with eMudhra, Aadhaar eSign APIs, etc.
+}
+function signDocument(type) {
+  const preview = document.getElementById(`${type}-preview`);
+  if (preview.textContent.trim() === "") return alert("Generate the document first.");
+
+  const name = "Navin"; // Simulate signed-in user
+  const date = new Date().toLocaleString();
+
+  if (!preview.textContent.includes("Signed Electronically")) {
+    preview.textContent += `\n\nSigned Electronically by ${name} on ${date}`;
+  }
+}
+
+function downloadDocument(type) {
+  const preview = document.getElementById(`${type}-preview`);
+  if (preview.textContent.trim() === "") return alert("Nothing to download. Generate and sign the document first.");
+
+  const blob = new Blob([preview.textContent], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = `${type}-document.txt`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+function addToDigiLocker(type) {
+  const preview = document.getElementById(`${type}-preview`);
+  if (preview.textContent.trim() === "") return alert("Nothing to add. Generate and sign the document first.");
+
+  localStorage.setItem(`digilocker-${type}`, preview.textContent);
+  const msg = document.getElementById(`${type}-digilocker-msg`);
+  msg.textContent = "Document added to DigiLocker successfully.";
+  msg.classList.remove("hidden");
+}
+
+function fetchFromDigiLocker(type) {
+  const savedDoc = localStorage.getItem(`digilocker-${type}`);
+  const preview = document.getElementById(`${type}-preview`);
+  const msg = document.getElementById(`${type}-digilocker-msg`);
+
+  if (!savedDoc) {
+    msg.textContent = "No document found in DigiLocker.";
+    msg.classList.remove("hidden");
+    return;
+  }
+
+  preview.textContent = savedDoc;
+  preview.classList.remove("hidden");
+  msg.textContent = "Fetched document from DigiLocker.";
+  msg.classList.remove("hidden");
+}
+
+
+  </script>
+
+<!-- Signature Controls -->
+<div class="mt-4 space-x-2">
+  <button onclick="signDocument('rti')" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded font-semibold">Sign Document</button>
+  <button onclick="downloadDocument('rti')" class="bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded font-semibold">Download Signed</button>
+  <button onclick="addToDigiLocker('rti')" class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded font-semibold">Add to DigiLocker</button>
+  <button onclick="fetchFromDigiLocker('rti')" class="bg-yellow-600 hover:bg-yellow-700 px-4 py-2 rounded font-semibold">Fetch from DigiLocker</button>
+</div>
+
+<pre id="rti-preview" class="hidden border p-3 mt-2" style="white-space: pre-wrap; background: #f9f9f9;"></pre>
+<div id="rti-digilocker-msg" class="text-sm mt-2 text-green-400 hidden"></div>
+</body>
+</html>
+

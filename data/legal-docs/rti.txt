@@ -1,0 +1,31 @@
+# Right to Information (RTI)
+
+## Right to Information Act
+The Right to Information Act (RTI) is a law enacted in India that sets out the rules and procedures regarding citizens' right to information. It was passed in 2005 and came into effect on October 12, 2005. The RTI Act provides citizens the right to request access to information held by public authorities.
+
+Key features of the RTI Act include:
+1. Universal right to information for all citizens
+2. Obligation on public authorities to disclose information proactively
+3. Independent Information Commissions at central and state levels
+4. Time-bound response to information requests
+5. Exemptions to disclosure in certain cases
+
+## How to File an RTI Application
+Filing an RTI application is a straightforward process:
+
+1. Identify the Public Information Officer (PIO) of the relevant department.
+2. Write a clear request with your details and the specific information needed.
+3. Pay the application fee (usually Rs. 10).
+4. Submit your application in person, by post, or online.
+5. Keep records of all correspondence.
+
+## RTI Response Timeline
+- Standard response: 30 days
+- Life/liberty matters: 48 hours
+- Transfer to another department: +5 days
+- Third party information: 40 days
+
+## Appeals Process
+1. First Appeal to department's Appellate Authority (within 30 days)
+2. Second Appeal to Information Commission (within 90 days)
+3. Writ Petition to High Court (if necessary) 

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Themis AI - User Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body class="bg-black text-white font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-gray-900 p-4 flex justify-between items-center">
+    <div class="text-2xl font-bold text-blue-500"> <a href="/index.html">Themis AI</a></div>
+    <ul class="flex space-x-6">
+      <li><a href="/chatbot.html" class="hover:text-blue-400">Chatbot</a></li>
+      <li><a href="/upload-summarize.html" class="hover:text-blue-400">Upload & Summarize</a></li>
+      <li><a href="/doc-generator.html" class="hover:text-blue-400">Document Generator</a></li>
+    </ul>
+
+    <!-- Profile Dropdown -->
+    <div class="relative">
+      <button id="profileButton" class="flex items-center space-x-2 focus:outline-none cursor-pointer">
+        <span class="text-gray-300">Loading...</span>
+        <svg class="w-5 h-5 text-gray-400 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <!-- Dropdown menu -->
+      <div id="profileDropdown" class="absolute right-0 mt-2 w-64 bg-gray-800 rounded-md shadow-lg hidden z-20">
+        <div id="userProfile" class="px-4 py-3 text-sm text-gray-300">
+          <!-- Filled dynamically -->
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-6 py-16">
+    <h1 class="text-5xl font-bold mb-12 text-center">Welcome</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- Chatbot Card -->
+      <a href="/chatbot.html" class="block bg-gray-800 p-8 rounded-lg shadow-lg hover:bg-gray-700 transition">
+        <img src="2106.i201.011.S.m004.c13.chatbot messenger AI isometric-01.jpg" alt="Chatbot" class="rounded-lg mb-4" />
+        <h2 class="text-2xl font-semibold mb-2">Chatbot</h2>
+        <p class="text-gray-300">Get instant legal advice and guidance from our AI-powered multilingual chatbot.</p>
+      </a>
+
+      <!-- Upload & Summarize Card -->
+      <a href="/upload-summarize.html" class="block bg-gray-800 p-8 rounded-lg shadow-lg hover:bg-gray-700 transition">
+        <img src="brunette-businesswoman-writing-document.jpg" alt="Upload & Summarize" class="rounded-lg mb-4" />
+        <h2 class="text-2xl font-semibold mb-2">Upload & Summarize</h2>
+        <p class="text-gray-300">Upload your legal documents and get easy-to-understand summaries instantly.</p>
+      </a>
+
+      <!-- Document Generator Card -->
+      <a href="/doc-generator.html" class="block bg-gray-800 p-8 rounded-lg shadow-lg hover:bg-gray-700 transition">
+        <img src="still-life-with-scales-justice(1).jpg" alt="Document Generator" class="rounded-lg mb-4" />
+        <h2 class="text-2xl font-semibold mb-2">Document Generator</h2>
+        <p class="text-gray-300">Generate legal documents like petitions, affidavits, and agreements with AI assistance.</p>
+      </a>
+    </div>
+  </main>
+
+  <footer class="text-center py-6 text-gray-400 bg-gray-900">
+    <p>&copy; 2025 Themis AI Legal Aid Platform. All rights reserved.</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+
+    window.onload = function () {
+      const user = JSON.parse(sessionStorage.getItem('user'));
+
+      if (!user) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      // Set welcome message
+      document.querySelector('main h1').textContent = `Welcome, ${user.name}`;
+
+      // Set navbar username
+      document.querySelector('#profileButton span').textContent = user.name;
+
+      // Format full address
+      const address = `Address: ${user.street}, ${user.vtc}, ${user.subdist}, ${user.district}, ${user.state}, ${user.pincode}`;
+
+      // Fill dropdown
+      const profileDiv = document.getElementById('userProfile');
+      profileDiv.innerHTML = `
+        <p><strong>Name:</strong> ${user.name}</p>
+        <p><strong>DOB:</strong> ${user.dob}</p>
+        <p><strong>Gender:</strong> ${user.gender}</p>
+        <p><strong>Phone:</strong> ${user.phone}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>${address}</strong></p>
+      `;
+    };
+
+    // Toggle dropdown visibility
+    document.addEventListener('DOMContentLoaded', () => {
+      const button = document.getElementById('profileButton');
+      const dropdown = document.getElementById('profileDropdown');
+
+      button.addEventListener('click', () => {
+        dropdown.classList.toggle('hidden');
+      });
+
+      // Close dropdown if clicked outside
+      document.addEventListener('click', (e) => {
+        if (!button.contains(e.target) && !dropdown.contains(e.target)) {
+          dropdown.classList.add('hidden');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

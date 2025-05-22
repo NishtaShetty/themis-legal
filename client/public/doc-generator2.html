@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Generate Legal Document - Themis AI</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-950 text-white min-h-screen font-sans">
+
+  <header class="bg-gray-900 p-4 flex justify-between items-center shadow">
+    <h1 class="text-xl font-bold">Document Generator</h1>
+    <button onclick="goBack()" class="bg-gray-700 px-4 py-2 rounded hover:bg-gray-600">Back</button>
+  </header>
+
+  <main class="max-w-3xl mx-auto py-10 px-6">
+    <h2 class="text-3xl font-semibold mb-6">Generate & eSign a Legal Document</h2>
+
+    <form id="genForm" class="space-y-4">
+      <input type="text" id="docTitle" placeholder="Document Title (e.g., RTI Request)" required class="w-full p-3 rounded text-black"/>
+      <textarea id="docDetails" rows="6" placeholder="Describe what the document should contain..." required class="w-full p-3 rounded text-black"></textarea>
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded">Generate Document</button>
+    </form>
+
+    <div id="generatedDoc" class="bg-gray-800 p-6 mt-8 rounded hidden">
+      <h3 class="text-2xl font-semibold mb-2">Preview</h3>
+      <pre id="docPreview" class="text-sm text-green-200 whitespace-pre-wrap mb-4"></pre>
+      <button onclick="simulateESign()" class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded">eSign Document</button>
+    </div>
+
+    <div id="signedMessage" class="mt-4 hidden text-green-400">✔️ eSign completed successfully.</div>
+    <div id="digilockerLink" class="mt-4 hidden text-blue-400">
+      📁 <a href="#" target="_blank" class="underline">View in DigiLocker</a>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('genForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const title = document.getElementById('docTitle').value;
+      const details = document.getElementById('docDetails').value;
+
+      const response = await fetch('http://localhost:5001/api/generate-doc', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ title, details, user: JSON.parse(sessionStorage.getItem("user")) })
+      });
+
+      const data = await response.json();
+      document.getElementById('docPreview').textContent = data.content;
+      document.getElementById('generatedDoc').classList.remove('hidden');
+    });
+
+    function simulateESign() {
+      setTimeout(() => {
+        document.getElementById('signedMessage').classList.remove('hidden');
+        document.getElementById('digilockerLink').classList.remove('hidden');
+        document.querySelector('#digilockerLink a').href = 'https://digilocker.gov.in/simulated-doc-url';
+      }, 1000);
+    }
+
+    function goBack() {
+      window.location.href = 'login.html';
+    }
+  </script>
+</body>
+</html>
