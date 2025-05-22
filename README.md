@@ -1,6 +1,6 @@
 # AI Legal Aid Platform
 
-A comprehensive legal assistance platform that combines a chatbot interface with LLaMA-powered legal document analysis.
+A powerful, AI-driven legal assistance platform that integrates a chatbot interface and LLaMA-based document analysis to streamline legal research, simplify form generation, and provide multilingual support.
 
 ## Project Structure
 
@@ -64,10 +64,10 @@ npm start
 
 ## Features
 
-- Interactive legal chatbot interface
-- LLaMA-powered legal document analysis
-- Comprehensive legal document database
-- Real-time legal assistance
+- AI Legal Chatbot — Interact with legal documents and questions through an intelligent chatbot powered by LLaMA.
+- Document Automation — Instantly generate Right to Information (RTI) forms and rent agreements based on user input.
+- Smart Summarization — Upload legal texts and receive concise summaries with optional translation to Hindi and Kannada.
+
 
 ## API Endpoints
 
@@ -78,7 +78,30 @@ npm start
 ### LLaMA Service
 - `GET /`: Service status
 - `POST /api/llama`: Send a question to the LLaMA model
+### Screenshots
+<p align="center"> <img src="results/homepage.png" width="200"/> <img src="results/login.png" width="200"/> <img src="results/landingpage.png" width="200"/> </p> <p align="center"> <img src="results/chatbot.png" width="200"/>  <img src="results/docgeneratefiliingdetails.png" width="200"/> <img src="results/summarizer.png" width="200"/> </p>
+<p align="center"><img src="results/docgenerated.png" width="200"/></p>
+
+##  Contributing
+
+Thank you for considering contributing to AI Legal Aid Platform!
+
+To get started:
+1. Fork the repo
+2. Create a feature branch
+3. Submit a pull request
 
 ## License
 
-MIT 
+MIT License
+
+Copyright (c) 2025 Nishta N Shetty
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions...
+
+[full MIT license text here or link]
